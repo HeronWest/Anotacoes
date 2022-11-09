@@ -19,7 +19,7 @@ abstract class _Anotacao with Store {
   List<AnotacaoModel> anotacoes = [];
 
   @observable
-  bool load = false;
+  bool loaded = true;
 
   @action
   setTitulo(value) => titulo = value;
@@ -28,7 +28,7 @@ abstract class _Anotacao with Store {
   setDescricao(value) => descricao = value;
 
   @action
-  setLoading() => load = !load;
+  setLoading() => loaded = !loaded;
 
   @action
   limparControladores(){
@@ -46,7 +46,8 @@ abstract class _Anotacao with Store {
 
   @action
   atualizarAnotacoes() async {
+    setLoading();
     anotacoes = await _anotacaoController.pegarAnotacoes();
-    print('anotacoes: $anotacoes');
+    setLoading();
   }
 }

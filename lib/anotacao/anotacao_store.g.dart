@@ -56,21 +56,6 @@ mixin _$AnotacaoStore on _Anotacao, Store {
     });
   }
 
-  late final _$loadAtom = Atom(name: '_Anotacao.load', context: context);
-
-  @override
-  bool get load {
-    _$loadAtom.reportRead();
-    return super.load;
-  }
-
-  @override
-  set load(bool value) {
-    _$loadAtom.reportWrite(value, super.load, () {
-      super.load = value;
-    });
-  }
-
   late final _$novaAnotacaoAsyncAction =
       AsyncAction('_Anotacao.novaAnotacao', context: context);
 
@@ -114,17 +99,6 @@ mixin _$AnotacaoStore on _Anotacao, Store {
   }
 
   @override
-  dynamic setLoading() {
-    final _$actionInfo =
-        _$_AnotacaoActionController.startAction(name: '_Anotacao.setLoading');
-    try {
-      return super.setLoading();
-    } finally {
-      _$_AnotacaoActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic limparControladores() {
     final _$actionInfo = _$_AnotacaoActionController.startAction(
         name: '_Anotacao.limparControladores');
@@ -140,8 +114,7 @@ mixin _$AnotacaoStore on _Anotacao, Store {
     return '''
 titulo: ${titulo},
 descricao: ${descricao},
-anotacoes: ${anotacoes},
-load: ${load}
+anotacoes: ${anotacoes}
     ''';
   }
 }

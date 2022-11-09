@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   final AnotacaoStore _anotacaoStore = AnotacaoStore();
 
   @override
+
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [

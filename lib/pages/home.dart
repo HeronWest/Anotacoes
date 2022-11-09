@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:meu_diario/anotacao/anotacao_store.dart';
+import 'package:meu_diario/widgets/Barra_Pesquisa.dart';
+import 'package:meu_diario/widgets/card_anotacao.dart';
 import 'package:provider/provider.dart';
 
 import '../appbar.dart';
@@ -17,58 +20,49 @@ class _MyHomeState extends State<MyHome> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     _anotacaoStore = Provider.of<AnotacaoStore>(context);
-    await _anotacaoStore.atualizarAnotacoes();
+
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(),
-      body: Center(
-        child: Column(
-          children: [
-            Expanded(
-              flex: 12,
-              child: ListView.builder(
-                  itemCount: _anotacaoStore.anotacoes.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      color: Color.fromARGB(255, 243, 243, 243),
-                      child: ListTile(
-                        leading: Icon(
-                            Icons.edit_note,
-                            size: 30,
-                            color: Colors.brown,
-                        ),
-                        title: Text(
-                          _anotacaoStore.anotacoes[index].titulo!,
-                          style: TextStyle(color: Colors.brown)),
-                        subtitle: Text(
-                          _anotacaoStore.anotacoes[index].descricao!,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+      body: Observer(
+        builder: (context) {
+          return _anotacaoStore.loaded ? Center(
+                    child: Column(
+                      children: [
+                        Opacity(
+                          opacity: 0.8,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 8.0),
+                            child: FractionallySizedBox(
+                              widthFactor: 0.98,
+                              child: BarraPesquisa(),
+                            ),
                           ),
-                        isThreeLine: true,
-                      ),
-                    );
-                  }
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Expanded(
-                flex: 1,
-                child: FractionallySizedBox(
-                    widthFactor: 0.96,
-                    child: ElevatedButton(
-                        child: Text('NOVA ANOTAÇÃO'),
-                        onPressed: () => Navigator.pushNamed(context, '/nova_anotacao')
-                    )
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+                        ),
+                        const Expanded(
+                            flex: 12,
+                            child: CardAnotacoes()
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: FractionallySizedBox(
+                                widthFactor: 0.96,
+                                child: ElevatedButton(
+                                    child: const Text('NOVA ANOTAÇÃO'),
+                                    onPressed: () => Navigator.pushNamed(context, '/nova_anotacao')
+                                )
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ) : Center(child: CircularProgressIndicator());
+        }
+      )
     );
   }
 }
