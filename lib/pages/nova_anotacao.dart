@@ -71,7 +71,7 @@ class _NovaAnotacaoPageState extends State<NovaAnotacaoPage> {
                       child: const Text('ADICIONAR ANOTAÇÃO'),
                       onPressed: () async {
                         await _anotacaoStore.novaAnotacao();
-                        await _anotacaoStore.atualizarAnotacoes();
+                        await _anotacaoStore.pegarAnotacoes();
                         clear.text = '';
                         clear2.text = '';
                         final snackBar = SnackBar(

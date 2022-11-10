@@ -17,7 +17,7 @@ class _DialogExcluirState extends State<DialogExcluir> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     _anotacaoStore = Provider.of<AnotacaoStore>(context);
-    await _anotacaoStore.atualizarAnotacoes();
+    await _anotacaoStore.pegarAnotacoes();
   }
 
   @override
@@ -32,7 +32,11 @@ class _DialogExcluirState extends State<DialogExcluir> {
         TextButton(
             onPressed: () => Navigator.of(context).pop(),
             child: Text('Cancelar')),
-        TextButton(onPressed: () {}, child: Text('Excluir'))
+        TextButton(onPressed: () async {
+          await _anotacaoStore.deletarAnotacao();
+          await _anotacaoStore.pegarAnotacoes();
+          Navigator.of(context).pop();
+        }, child: Text('Excluir'))
       ],
     );
   }

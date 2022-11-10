@@ -17,7 +17,7 @@ class _CardAnotacoesState extends State<CardAnotacoes> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     _anotacaoStore = Provider.of<AnotacaoStore>(context);
-    await _anotacaoStore.atualizarAnotacoes();
+    await _anotacaoStore.pegarAnotacoes();
   }
 
   @override
@@ -28,10 +28,8 @@ class _CardAnotacoesState extends State<CardAnotacoes> {
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
               onTap: () {
-                _anotacaoStore
-                    .setTitulo(_anotacaoStore.anotacoes[index].titulo);
-                _anotacaoStore
-                    .setDescricao(_anotacaoStore.anotacoes[index].descricao);
+                _anotacaoStore.setTitulo(_anotacaoStore.anotacoes[index].titulo);
+                _anotacaoStore.setDescricao(_anotacaoStore.anotacoes[index].descricao);
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -42,7 +40,7 @@ class _CardAnotacoesState extends State<CardAnotacoes> {
                 color: Color.fromARGB(255, 243, 243, 243),
                 child: ListTile(
                   leading: PopupMenuButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.edit_note,
                         size: 30,
                         color: Colors.brown,
@@ -50,16 +48,22 @@ class _CardAnotacoesState extends State<CardAnotacoes> {
                       itemBuilder: (context) => [
                             PopupMenuItem(
                                 child: TextButton(
-                              onPressed: () {},
-                              child: Text('EDITAR'),
+                              onPressed: () async {
+                                Navigator.of(context).pop();
+                                _anotacaoStore.id = _anotacaoStore.anotacoes[index].id!;
+                                _anotacaoStore.titulo = _anotacaoStore.anotacoes[index].titulo!;
+                                _anotacaoStore.descricao = _anotacaoStore.anotacoes[index].descricao!;
+                                Navigator.of(context).pushNamed('/editar_anotacao');
+
+                              },
+                              child: const Text('EDITAR'),
                             )),
                             PopupMenuItem(
                               child: TextButton(
                                   onPressed: () {
-                                    _anotacaoStore.id =
-                                        _anotacaoStore.anotacoes[index].id!;
-                                    _anotacaoStore.titulo =
-                                        _anotacaoStore.anotacoes[index].titulo!;
+                                    Navigator.of(context).pop();
+                                    _anotacaoStore.id = _anotacaoStore.anotacoes[index].id!;
+                                    _anotacaoStore.titulo = _anotacaoStore.anotacoes[index].titulo!;
                                     showDialog(
                                         context: context,
                                         builder: (BuildContext context) {

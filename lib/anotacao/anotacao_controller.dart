@@ -15,8 +15,14 @@ class AnotacaoController {
     _anotacaoDao.salvarAnotacao(novaAnotacao);
   }
 
-  pegarAnotacoes() async {
-    List<AnotacaoModel> anotacoes = await _anotacaoDao.consultarAnotacoes();
+  pegarAnotacoes(String titulo) async {
+    List<AnotacaoModel> anotacoes = await _anotacaoDao.consultarAnotacoes(titulo);
     return anotacoes;
+  }
+  deletarAnotacao(int id) async {
+    return await _anotacaoDao.deletarAnotacao(id);
+  }
+  atualizarAnotacao(int id, String titulo, String descricao) async {
+    return await _anotacaoDao.updateAnotacao(id, titulo, descricao);
   }
 }

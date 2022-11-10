@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:meu_diario/anotacao/anotacao_store.dart';
-import 'package:meu_diario/widgets/Barra_Pesquisa.dart';
+import 'package:meu_diario/widgets/barra_pesquisa.dart';
 import 'package:meu_diario/widgets/card_anotacao.dart';
 import 'package:provider/provider.dart';
 
@@ -26,9 +26,7 @@ class _MyHomeState extends State<MyHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(),
-      body: Observer(builder: (context) {
-        return _anotacaoStore.loaded
-            ? Center(
+      body: Center(
                 child: Column(
                   children: [
                     Opacity(
@@ -37,16 +35,18 @@ class _MyHomeState extends State<MyHome> {
                         padding: EdgeInsets.only(top: 8.0),
                         child: FractionallySizedBox(
                           widthFactor: 0.98,
-                          child: BarraPesquisa(),
+                          child: Observer(
+                            builder: (context) {
+                              return _anotacaoStore.loaded ? BarraPesquisa() : Center(child: CircularProgressIndicator());
+                            }
+                          ),
                         ),
                       ),
                     ),
                     const Expanded(flex: 12, child: CardAnotacoes()),
                   ],
                 ),
-              )
-            : Center(child: CircularProgressIndicator());
-      }),
+              ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pushNamed(context, '/nova_anotacao'),
         backgroundColor: Colors.brown,

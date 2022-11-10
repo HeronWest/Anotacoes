@@ -22,6 +22,9 @@ abstract class _Anotacao with Store {
   List<AnotacaoModel> anotacoes = [];
 
   @observable
+  String pesquisa = '';
+
+  @observable
   bool loaded = true;
 
   @action
@@ -29,6 +32,12 @@ abstract class _Anotacao with Store {
 
   @action
   setDescricao(value) => descricao = value;
+
+  @action
+  setPesquisa(value) async {
+    pesquisa = value;
+    await pegarAnotacoes();
+  }
 
   @action
   setLoading() => loaded = !loaded;
@@ -48,9 +57,15 @@ abstract class _Anotacao with Store {
   }
 
   @action
-  atualizarAnotacoes() async {
+  pegarAnotacoes() async {
     setLoading();
-    anotacoes = await _anotacaoController.pegarAnotacoes();
+    anotacoes = await _anotacaoController.pegarAnotacoes(pesquisa);
     setLoading();
+  }
+  deletarAnotacao() async {
+    await _anotacaoController.deletarAnotacao(id!);
+  }
+  atualizarAnotacao() async {
+    await _anotacaoController.atualizarAnotacao(id!, titulo, descricao);
   }
 }

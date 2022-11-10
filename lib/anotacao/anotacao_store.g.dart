@@ -71,6 +71,22 @@ mixin _$AnotacaoStore on _Anotacao, Store {
     });
   }
 
+  late final _$pesquisaAtom =
+      Atom(name: '_Anotacao.pesquisa', context: context);
+
+  @override
+  String get pesquisa {
+    _$pesquisaAtom.reportRead();
+    return super.pesquisa;
+  }
+
+  @override
+  set pesquisa(String value) {
+    _$pesquisaAtom.reportWrite(value, super.pesquisa, () {
+      super.pesquisa = value;
+    });
+  }
+
   late final _$loadedAtom = Atom(name: '_Anotacao.loaded', context: context);
 
   @override
@@ -86,6 +102,14 @@ mixin _$AnotacaoStore on _Anotacao, Store {
     });
   }
 
+  late final _$setPesquisaAsyncAction =
+      AsyncAction('_Anotacao.setPesquisa', context: context);
+
+  @override
+  Future setPesquisa(dynamic value) {
+    return _$setPesquisaAsyncAction.run(() => super.setPesquisa(value));
+  }
+
   late final _$novaAnotacaoAsyncAction =
       AsyncAction('_Anotacao.novaAnotacao', context: context);
 
@@ -94,13 +118,12 @@ mixin _$AnotacaoStore on _Anotacao, Store {
     return _$novaAnotacaoAsyncAction.run(() => super.novaAnotacao());
   }
 
-  late final _$atualizarAnotacoesAsyncAction =
-      AsyncAction('_Anotacao.atualizarAnotacoes', context: context);
+  late final _$pegarAnotacoesAsyncAction =
+      AsyncAction('_Anotacao.pegarAnotacoes', context: context);
 
   @override
-  Future atualizarAnotacoes() {
-    return _$atualizarAnotacoesAsyncAction
-        .run(() => super.atualizarAnotacoes());
+  Future pegarAnotacoes() {
+    return _$pegarAnotacoesAsyncAction.run(() => super.pegarAnotacoes());
   }
 
   late final _$_AnotacaoActionController =
@@ -157,6 +180,7 @@ id: ${id},
 titulo: ${titulo},
 descricao: ${descricao},
 anotacoes: ${anotacoes},
+pesquisa: ${pesquisa},
 loaded: ${loaded}
     ''';
   }

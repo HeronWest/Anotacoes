@@ -17,7 +17,7 @@ class _DialogAnotacaoState extends State<DialogAnotacao> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     _anotacaoStore = Provider.of<AnotacaoStore>(context);
-    await _anotacaoStore.atualizarAnotacoes();
+    await _anotacaoStore.pegarAnotacoes();
   }
 
   @override
