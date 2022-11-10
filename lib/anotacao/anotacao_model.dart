@@ -2,32 +2,28 @@ import 'dart:convert';
 import '../../helper/sql/entity.dart';
 
 class AnotacaoModel extends Entity {
-
+  int? id;
   String? titulo;
   String? descricao;
 
-  AnotacaoModel({
-
-    this.titulo,
-    this.descricao
-  });
+  AnotacaoModel({this.id, this.titulo, this.descricao});
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          (other is AnotacaoModel &&
-              runtimeType == other.runtimeType &&
-              titulo == other.titulo &&
-              descricao == other.descricao);
+      (other is AnotacaoModel &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          titulo == other.titulo &&
+          descricao == other.descricao);
 
   @override
-  int get hashCode =>
-      titulo.hashCode ^
-      descricao.hashCode;
+  int get hashCode => titulo.hashCode ^ descricao.hashCode;
 
   @override
   String toString() {
     return 'AnotacaoModel{' +
+        ' id: $id,' +
         ' titulo: $titulo,' +
         ' descricao: $descricao,' +
         '}';
@@ -35,6 +31,7 @@ class AnotacaoModel extends Entity {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': this.id,
       'titulo': this.titulo,
       'descricao': this.descricao,
     };
@@ -42,6 +39,7 @@ class AnotacaoModel extends Entity {
 
   factory AnotacaoModel.fromJson(Map<String, dynamic> json) {
     return AnotacaoModel(
+      id: json['id'] as int,
       titulo: json['titulo'] as String,
       descricao: json['descricao'] as String,
     );

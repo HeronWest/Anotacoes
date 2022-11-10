@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:meu_diario/widgets/dialog_anotacao.dart';
 import 'package:provider/provider.dart';
 import '../anotacao/anotacao_store.dart';
+import 'dialog_excluir.dart';
 
 class CardAnotacoes extends StatefulWidget {
   const CardAnotacoes({Key? key}) : super(key: key);
@@ -17,23 +19,57 @@ class _CardAnotacoesState extends State<CardAnotacoes> {
     _anotacaoStore = Provider.of<AnotacaoStore>(context);
     await _anotacaoStore.atualizarAnotacoes();
   }
+
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (context) {
-        return ListView.builder(
-            itemCount: _anotacaoStore.anotacoes.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Card(
+    return Observer(builder: (context) {
+      return ListView.builder(
+          itemCount: _anotacaoStore.anotacoes.length,
+          itemBuilder: (BuildContext context, int index) {
+            return InkWell(
+              onTap: () {
+                _anotacaoStore
+                    .setTitulo(_anotacaoStore.anotacoes[index].titulo);
+                _anotacaoStore
+                    .setDescricao(_anotacaoStore.anotacoes[index].descricao);
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return DialogAnotacao();
+                    });
+              },
+              child: Card(
                 color: Color.fromARGB(255, 243, 243, 243),
                 child: ListTile(
-                  leading: Icon(
-                    Icons.edit_note,
-                    size: 30,
-                    color: Colors.brown,
-                  ),
-                  title: Text(
-                      _anotacaoStore.anotacoes[index].titulo!,
+                  leading: PopupMenuButton(
+                      icon: Icon(
+                        Icons.edit_note,
+                        size: 30,
+                        color: Colors.brown,
+                      ),
+                      itemBuilder: (context) => [
+                            PopupMenuItem(
+                                child: TextButton(
+                              onPressed: () {},
+                              child: Text('EDITAR'),
+                            )),
+                            PopupMenuItem(
+                              child: TextButton(
+                                  onPressed: () {
+                                    _anotacaoStore.id =
+                                        _anotacaoStore.anotacoes[index].id!;
+                                    _anotacaoStore.titulo =
+                                        _anotacaoStore.anotacoes[index].titulo!;
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return DialogExcluir();
+                                        });
+                                  },
+                                  child: Text('EXCLUIR')),
+                            )
+                          ]),
+                  title: Text(_anotacaoStore.anotacoes[index].titulo!,
                       style: TextStyle(color: Colors.brown)),
                   subtitle: Text(
                     _anotacaoStore.anotacoes[index].descricao!,
@@ -42,10 +78,9 @@ class _CardAnotacoesState extends State<CardAnotacoes> {
                   ),
                   isThreeLine: true,
                 ),
-              );
-            }
-        );
-      }
-    );
+              ),
+            );
+          });
+    });
   }
 }

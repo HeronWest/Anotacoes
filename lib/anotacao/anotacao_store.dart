@@ -10,6 +10,9 @@ abstract class _Anotacao with Store {
   final AnotacaoController _anotacaoController = AnotacaoController();
 
   @observable
+  int? id;
+
+  @observable
   String titulo = '';
 
   @observable
@@ -31,7 +34,7 @@ abstract class _Anotacao with Store {
   setLoading() => loaded = !loaded;
 
   @action
-  limparControladores(){
+  limparControladores() {
     titulo = '';
     descricao = '';
   }

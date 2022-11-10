@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meu_diario/anotacao/anotacao_store.dart';
-import 'package:meu_diario/appbar.dart';
 import 'package:provider/provider.dart';
+
+import '../widgets/appbar.dart';
 
 class NovaAnotacaoPage extends StatefulWidget {
   const NovaAnotacaoPage({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _NovaAnotacaoPageState extends State<NovaAnotacaoPage> {
     super.didChangeDependencies();
     _anotacaoStore = Provider.of<AnotacaoStore>(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +42,7 @@ class _NovaAnotacaoPageState extends State<NovaAnotacaoPage> {
                     decoration: const InputDecoration(
                         hintText: 'Título',
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.brown)
-                        )
-                    ),
+                            borderSide: BorderSide(color: Colors.brown))),
                   ),
                 ),
               ),
@@ -57,15 +57,13 @@ class _NovaAnotacaoPageState extends State<NovaAnotacaoPage> {
                     maxLines: null,
                     decoration: const InputDecoration(
                       isDense: true,
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.brown)
-                        ),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.brown)
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.brown)),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.brown)),
                     ),
                   ),
                 ),
-              ),
               ),
               FractionallySizedBox(
                   widthFactor: 0.96,
@@ -76,9 +74,11 @@ class _NovaAnotacaoPageState extends State<NovaAnotacaoPage> {
                         await _anotacaoStore.atualizarAnotacoes();
                         clear.text = '';
                         clear2.text = '';
-                      }
-                  )
-              )
+                        final snackBar = SnackBar(
+                            content:
+                                const Text('Anotação cadastrada com sucesso!'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }))
             ],
           ),
         ),
@@ -89,11 +89,11 @@ class _NovaAnotacaoPageState extends State<NovaAnotacaoPage> {
 
 class UpperCaseTextFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     return TextEditingValue(
       text: newValue.text.toUpperCase(),
       selection: newValue.selection,
     );
   }
 }
-
