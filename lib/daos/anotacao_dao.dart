@@ -1,5 +1,5 @@
 import '../helper/sql/basedao.dart';
-import 'anotacao_model.dart';
+import '../models/anotacao_model.dart';
 
 class AnotacaoDao extends BaseDao<AnotacaoModel>{
 

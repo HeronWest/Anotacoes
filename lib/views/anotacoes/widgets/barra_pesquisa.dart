@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../anotacao/anotacao_store.dart';
+import '../../../stores/anotacao_store.dart';
 
 class BarraPesquisa extends StatefulWidget {
   const BarraPesquisa ({Key? key}) : super(key: key);
@@ -25,6 +25,7 @@ class _BarraPesquisaState extends State<BarraPesquisa> {
       onChanged: _anotacaoStore.setPesquisa,
       inputFormatters: [UpperCaseTextFormatter()],
       decoration: InputDecoration(
+        hintText: 'Anotações',
         prefixIcon: Icon(Icons.search),
         border: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.brown)

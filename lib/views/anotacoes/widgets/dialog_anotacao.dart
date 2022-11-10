@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
-import '../anotacao/anotacao_store.dart';
+import '../../../stores/anotacao_store.dart';
 
 class DialogAnotacao extends StatefulWidget {
   const DialogAnotacao({super.key});

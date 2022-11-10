@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:meu_diario/anotacao/anotacao_store.dart';
+import 'package:meu_diario/stores/anotacao_store.dart';
 import 'package:meu_diario/routes/routes.dart';
+import 'package:meu_diario/views/anotacoes/pages/anotacoes_page.dart';
 import 'package:provider/provider.dart';
-import 'pages/home.dart';
 
 void main() async {
   runApp(MyApp());

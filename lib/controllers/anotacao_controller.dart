@@ -1,8 +1,8 @@
-import 'package:meu_diario/anotacao/anotacao_dao.dart';
+import 'package:meu_diario/daos/anotacao_dao.dart';
 import 'package:meu_diario/helper/sql/db_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'anotacao_model.dart';
+import '../models/anotacao_model.dart';
 
 class AnotacaoController {
   final AnotacaoDao _anotacaoDao = AnotacaoDao();

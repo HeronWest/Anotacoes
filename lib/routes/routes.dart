@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meu_diario/pages/editar_anotacao.dart';
-import 'package:meu_diario/pages/nova_anotacao.dart';
+import '../views/anotacoes/pages/editar_anotacao.dart';
+import '../views/anotacoes/pages/nova_anotacao.dart';
 
 class Routes {
   static const initial = '/';

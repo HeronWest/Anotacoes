@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:meu_diario/anotacao/anotacao_store.dart';
+import 'package:meu_diario/stores/anotacao_store.dart';
 import 'package:provider/provider.dart';
+import '../../../widgets/appbar.dart';
 
-import '../widgets/appbar.dart';
 
 class NovaAnotacaoPage extends StatefulWidget {
   const NovaAnotacaoPage({Key? key}) : super(key: key);

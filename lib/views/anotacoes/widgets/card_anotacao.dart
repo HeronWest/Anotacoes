@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:meu_diario/widgets/dialog_anotacao.dart';
 import 'package:provider/provider.dart';
-import '../anotacao/anotacao_store.dart';
+import '../../../stores/anotacao_store.dart';
+import 'dialog_anotacao.dart';
 import 'dialog_excluir.dart';
 
 class CardAnotacoes extends StatefulWidget {

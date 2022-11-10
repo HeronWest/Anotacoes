@@ -1,7 +1,6 @@
-import 'package:meu_diario/anotacao/anotacao_controller.dart';
 import 'package:mobx/mobx.dart';
-
-import 'anotacao_model.dart';
+import '../controllers/anotacao_controller.dart';
+import '../models/anotacao_model.dart';
 part 'anotacao_store.g.dart';
 
 class AnotacaoStore = _Anotacao with _$AnotacaoStore;
