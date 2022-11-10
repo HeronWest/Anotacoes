@@ -1,7 +1,9 @@
+import 'package:anoteichons/routes/routes.dart';
+import 'package:anoteichons/stores/anotacao_store.dart';
+import 'package:anoteichons/stores/pasta_store.dart';
+import 'package:anoteichons/views/anotacoes/pages/anotacoes_page.dart';
+import 'package:anoteichons/views/pastas/pages/pastas_page.dart';
 import 'package:flutter/material.dart';
-import 'package:meu_diario/stores/anotacao_store.dart';
-import 'package:meu_diario/routes/routes.dart';
-import 'package:meu_diario/views/anotacoes/pages/anotacoes_page.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -11,6 +13,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   final AnotacaoStore _anotacaoStore = AnotacaoStore();
+  final PastaStore _pastaStore = PastaStore();
 
   @override
 
@@ -18,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<AnotacaoStore>(create: (_) => _anotacaoStore),
+        Provider<PastaStore>(create: (_) => _pastaStore)
       ],
       child: MaterialApp(
         initialRoute: Routes.initial,
@@ -27,7 +31,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           primarySwatch: Colors.brown,
         ),
-        home: MyHome(),
+        home: PastaHomePage(),
       ),
     );
   }

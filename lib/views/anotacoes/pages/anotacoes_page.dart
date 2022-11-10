@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:meu_diario/stores/anotacao_store.dart';
 import 'package:provider/provider.dart';
-import '../../../widgets/Barra_Pesquisa.dart';
+import '../../../stores/anotacao_store.dart';
 import '../../../widgets/appbar.dart';
 import '../widgets/card_anotacao.dart';
+import '../widgets/barra_pesquisa.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key? key}) : super(key: key);

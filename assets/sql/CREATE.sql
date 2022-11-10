@@ -1,5 +1,13 @@
-CREATE TABLE IF NOT EXISTS anotacoes(
+CREATE TABLE IF NOT EXISTS pastas(
     id          INTEGER PRIMARY KEY autoincrement,
-    titulo      TEXT,
-    descricao   TEXT
+    nome        TEXT,
+    cor         TEXT
+);
+
+CREATE TABLE IF NOT EXISTS anotacoes(
+    pasta                   INTEGER,
+    id                      INTEGER PRIMARY KEY autoincrement,
+    titulo                  TEXT,
+    descricao               TEXT
+
 );

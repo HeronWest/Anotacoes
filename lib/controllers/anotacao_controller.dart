@@ -1,7 +1,6 @@
-import 'package:meu_diario/daos/anotacao_dao.dart';
-import 'package:meu_diario/helper/sql/db_helper.dart';
 import 'package:sqflite/sqflite.dart';
-
+import '../daos/anotacao_dao.dart';
+import '../helper/sql/db_helper.dart';
 import '../models/anotacao_model.dart';
 
 class AnotacaoController {
