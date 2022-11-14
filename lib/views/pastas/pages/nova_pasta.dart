@@ -17,6 +17,7 @@ class _NovaPastaPageState extends State<NovaPastaPage> {
 
   Color pickerColor = Color(0xff443a49);
   Color currentColor = Color(0xff443a49);
+  TextEditingController clear = TextEditingController();
   late PastaStore _pastaStore;
 
   @override
@@ -40,6 +41,7 @@ class _NovaPastaPageState extends State<NovaPastaPage> {
                   child: FractionallySizedBox(
                     widthFactor: 0.96,
                     child: TextFormField(
+                      controller: clear,
                       onChanged: _pastaStore.setNome,
                       inputFormatters: [UpperCaseTextFormatter()],
                       decoration: const InputDecoration(
@@ -64,6 +66,10 @@ class _NovaPastaPageState extends State<NovaPastaPage> {
                         child: const Text('CRIAR PASTA'),
                         onPressed: () async {
                           _pastaStore.criarPasta();
+                          _pastaStore.pegarPastas();
+                          pickerColor = Color(0xff443a49);
+                          currentColor = Color(0xff443a49);
+                          clear.text = '';
                           final snackBar = SnackBar(
                               content: const Text('Pasta criada com sucesso!'));
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);

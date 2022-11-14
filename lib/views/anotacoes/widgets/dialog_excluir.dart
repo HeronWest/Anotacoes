@@ -4,14 +4,14 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import '../../../stores/anotacao_store.dart';
 
-class DialogExcluir extends StatefulWidget {
-  const DialogExcluir({super.key});
+class DialogExcluirAnotacao extends StatefulWidget {
+  const DialogExcluirAnotacao({super.key});
 
   @override
-  State<DialogExcluir> createState() => _DialogExcluirState();
+  State<DialogExcluirAnotacao> createState() => _DialogExcluirAnotacaoState();
 }
 
-class _DialogExcluirState extends State<DialogExcluir> {
+class _DialogExcluirAnotacaoState extends State<DialogExcluirAnotacao> {
   late AnotacaoStore _anotacaoStore;
   void didChangeDependencies() async {
     super.didChangeDependencies();

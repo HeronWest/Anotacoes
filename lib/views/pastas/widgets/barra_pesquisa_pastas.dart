@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../stores/anotacao_store.dart';
+import '../../../stores/pasta_store.dart';
 
 class BarraPesquisa extends StatefulWidget {
   const BarraPesquisa ({Key? key}) : super(key: key);
@@ -13,18 +14,19 @@ class BarraPesquisa extends StatefulWidget {
 
 class _BarraPesquisaState extends State<BarraPesquisa> {
 
-  late AnotacaoStore _anotacaoStore;
+  late PastaStore _pastaStore;
   void didChangeDependencies() async {
     super.didChangeDependencies();
-    _anotacaoStore = Provider.of<AnotacaoStore>(context);
+    _pastaStore = Provider.of<PastaStore>(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: _pastaStore.setPesquisa,
       inputFormatters: [UpperCaseTextFormatter()],
       decoration: InputDecoration(
-        hintText: 'Anotações',
+        hintText: 'Pastas',
         prefixIcon: Icon(Icons.search),
         border: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.brown)

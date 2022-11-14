@@ -1,6 +1,10 @@
-import 'package:anoteichons/views/pastas/pages/barra_pesquisa.dart';
+import 'package:anoteichons/stores/pasta_store.dart';
+import 'package:anoteichons/views/pastas/widgets/barra_pesquisa_pastas.dart';
+import 'package:anoteichons/views/pastas/widgets/card_pasta.dart';
 import 'package:anoteichons/widgets/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 class PastaHomePage extends StatefulWidget {
   const PastaHomePage({Key? key}) : super(key: key);
@@ -10,6 +14,14 @@ class PastaHomePage extends StatefulWidget {
 }
 
 class _PastaHomePageState extends State<PastaHomePage> {
+  late PastaStore _pastaStore;
+  @override
+  void didChangeDependencies() async {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    _pastaStore = Provider.of<PastaStore>(context);
+    await _pastaStore.pegarPastas();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +29,25 @@ class _PastaHomePageState extends State<PastaHomePage> {
       body: Center(
         child: Column(
           children: [
-            BarraPesquisa()
+            Opacity(
+              opacity: 0.8,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: FractionallySizedBox(
+                  widthFactor: 0.98,
+                  child: Observer(
+                    builder: (context) {
+                      return BarraPesquisa();
+                    }
+                  ),
+                ),
+              ),
+            ),
+            Observer(
+              builder: (context) {
+                return Expanded(child: CardPastas());
+              }
+            )
           ],
         ),
       ),

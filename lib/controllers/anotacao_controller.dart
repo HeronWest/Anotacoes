@@ -7,15 +7,16 @@ class AnotacaoController {
   final AnotacaoDao _anotacaoDao = AnotacaoDao();
   Future<Database?> get db => DatabaseHelper.getInstance().db;
 
-  criarAnotacao(String titulo, String descricao) async {
+  criarAnotacao(String titulo, String descricao, pasta) async {
     AnotacaoModel novaAnotacao = AnotacaoModel()
+      ..pasta = pasta
       ..titulo = titulo
       ..descricao = descricao;
     _anotacaoDao.salvarAnotacao(novaAnotacao);
   }
 
-  pegarAnotacoes(String titulo) async {
-    List<AnotacaoModel> anotacoes = await _anotacaoDao.consultarAnotacoes(titulo);
+  pegarAnotacoes(String titulo, int pasta) async {
+    List<AnotacaoModel> anotacoes = await _anotacaoDao.consultarAnotacoes(titulo, pasta);
     return anotacoes;
   }
   deletarAnotacao(int id) async {

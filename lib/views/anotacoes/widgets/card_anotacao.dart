@@ -1,3 +1,4 @@
+import 'package:anoteichons/stores/pasta_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -14,9 +15,11 @@ class CardAnotacoes extends StatefulWidget {
 
 class _CardAnotacoesState extends State<CardAnotacoes> {
   late AnotacaoStore _anotacaoStore;
+  late PastaStore _pastaStore;
   void didChangeDependencies() async {
     super.didChangeDependencies();
     _anotacaoStore = Provider.of<AnotacaoStore>(context);
+    _pastaStore = Provider.of<PastaStore>(context);
     await _anotacaoStore.pegarAnotacoes();
   }
 
@@ -67,7 +70,7 @@ class _CardAnotacoesState extends State<CardAnotacoes> {
                                     showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
-                                          return DialogExcluir();
+                                          return DialogExcluirAnotacao();
                                         });
                                   },
                                   child: Text('EXCLUIR')),

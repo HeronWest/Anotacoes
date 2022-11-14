@@ -13,5 +13,14 @@ class PastaController {
         ..cor = cor;
     await _pastaDao.salvarPasta(pasta);
   }
-
+  pegarPastas(String titulo) async {
+    List<PastaModel> pastas = await _pastaDao.consultarPastas(titulo);
+    return pastas;
+  }
+  atualizarPasta(int id, String nome, String cor) async {
+    return await _pastaDao.updatePasta(id, nome, cor);
+  }
+  deletarPasta(id) async {
+    return await _pastaDao.excluirPasta(id);
+  }
 }

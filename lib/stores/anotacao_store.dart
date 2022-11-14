@@ -12,6 +12,9 @@ abstract class _Anotacao with Store {
   int? id;
 
   @observable
+  int? pasta;
+
+  @observable
   String titulo = '';
 
   @observable
@@ -25,6 +28,9 @@ abstract class _Anotacao with Store {
 
   @observable
   bool loaded = true;
+
+  @action
+  setPasta(value) => pasta = value;
 
   @action
   setTitulo(value) => titulo = value;
@@ -50,7 +56,7 @@ abstract class _Anotacao with Store {
   @action
   novaAnotacao() async {
     setLoading();
-    _anotacaoController.criarAnotacao(titulo, descricao);
+    _anotacaoController.criarAnotacao(titulo, descricao, pasta);
     limparControladores();
     setLoading();
   }
@@ -58,12 +64,14 @@ abstract class _Anotacao with Store {
   @action
   pegarAnotacoes() async {
     setLoading();
-    anotacoes = await _anotacaoController.pegarAnotacoes(pesquisa);
+    anotacoes = await _anotacaoController.pegarAnotacoes(pesquisa, pasta!);
     setLoading();
   }
+  @action
   deletarAnotacao() async {
     await _anotacaoController.deletarAnotacao(id!);
   }
+  @action
   atualizarAnotacao() async {
     await _anotacaoController.atualizarAnotacao(id!, titulo, descricao);
   }

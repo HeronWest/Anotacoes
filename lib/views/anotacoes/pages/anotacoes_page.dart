@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../stores/anotacao_store.dart';
 import '../../../widgets/appbar.dart';
 import '../widgets/card_anotacao.dart';
-import '../widgets/barra_pesquisa.dart';
+import '../widgets/barra_pesquisa_anotacoes.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key? key}) : super(key: key);
@@ -19,6 +19,7 @@ class _MyHomeState extends State<MyHome> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     _anotacaoStore = Provider.of<AnotacaoStore>(context);
+    await _anotacaoStore.pegarAnotacoes();
   }
 
   @override
@@ -36,13 +37,17 @@ class _MyHomeState extends State<MyHome> {
                           widthFactor: 0.98,
                           child: Observer(
                             builder: (context) {
-                              return _anotacaoStore.loaded ? BarraPesquisa() : Center(child: CircularProgressIndicator());
+                              return BarraPesquisa();
                             }
                           ),
                         ),
                       ),
                     ),
-                    const Expanded(flex: 12, child: CardAnotacoes()),
+                    Observer(
+                      builder: (context) {
+                        return Expanded(flex: 12, child: CardAnotacoes());
+                      }
+                    ),
                   ],
                 ),
               ),

@@ -24,7 +24,7 @@ class _DialogAnotacaoState extends State<DialogAnotacao> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text('${_anotacaoStore.titulo}'),
-      content: Text('${_anotacaoStore.descricao}'),
+      content: SingleChildScrollView(child: Text('${_anotacaoStore.descricao}')),
     );
   }
 }

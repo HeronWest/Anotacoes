@@ -18,15 +18,15 @@ class AnotacaoDao extends BaseDao<AnotacaoModel>{
       print(e);
     }
   }
-  Future consultarAnotacoes(String titulo) async {
+  Future consultarAnotacoes(String titulo, int pasta) async {
     if (titulo == "") {
     try{
-        List<AnotacaoModel> anotacoes = await query('SELECT * FROM anotacoes');
+        List<AnotacaoModel> anotacoes = await query('SELECT * FROM anotacoes WHERE pasta = "$pasta"');
         return anotacoes;
       } catch (e) {
         print(e);
       } } else {
-      List<AnotacaoModel> anotacoes = await query('SELECT * FROM anotacoes WHERE titulo LIKE "%$titulo%"');
+      List<AnotacaoModel> anotacoes = await query('SELECT * FROM anotacoes WHERE titulo LIKE "%$titulo%" AND pasta = "$pasta"');
       return anotacoes;
     }
   }

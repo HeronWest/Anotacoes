@@ -6,7 +6,8 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Center(child: Text('ANOTAÇÕES', style: TextStyle(color: Colors.white),)),
+      centerTitle: true,
+      title: Text('ANOTAÇÕES', style: TextStyle(color: Colors.white),),
       backgroundColor: Colors.brown,
     );
   }
